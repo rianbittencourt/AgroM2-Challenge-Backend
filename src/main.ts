@@ -9,9 +9,9 @@ async function bootstrap() {
 
   // Habilita o CORS para todas as origens
   app.enableCors({
-    origin: '*', // Permite todas as origens
-    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Permite os métodos HTTP
-    allowedHeaders: ['Content-Type', 'Authorization'], // Permite esses cabeçalhos
+    origin: 'http://localhost:3000', // Substitua pelo URL do seu frontend em produção
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true, // Define se o servidor permitirá credenciais na solicitação
   });
 
   app.useGlobalPipes(new ValidationPipe());
