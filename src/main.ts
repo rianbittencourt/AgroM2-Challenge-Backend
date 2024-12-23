@@ -9,11 +9,10 @@ async function bootstrap() {
 
   // Habilita o CORS para todas as origens
   app.enableCors({
-    origin: 'http://localhost:3000', // Permite apenas o front-end que está no localhost:3000
-    methods: ['GET', 'POST', 'PUT', 'DELETE'], 
-    allowedHeaders: ['Content-Type', 'Authorization'], 
+    origin: '*', // Permite todas as origens
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Permite os métodos HTTP
+    allowedHeaders: ['Content-Type', 'Authorization'], // Permite esses cabeçalhos
   });
-
 
   app.useGlobalPipes(new ValidationPipe());
 
