@@ -15,7 +15,7 @@ export class AuthController {
   // Injeção do serviço AuthService que vai gerenciar o login e registro
   constructor(private readonly authService: AuthService) {}
 
-  // Rota para registrar um novo usuário
+  // Rota para registrar um novo usuário//
   @Post('register') 
   async register(@Body() registerDto: RegisterDto) {
     // Chama o método de registro do AuthService e retorna a resposta
