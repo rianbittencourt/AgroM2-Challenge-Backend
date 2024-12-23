@@ -49,15 +49,15 @@ export class HarvestsService {
     return harvest;
   }
 
-
+ // Método para alterar os dados de uma colheita
   async update(id: string, updateHarvestDto: UpdateHarvestDto, user: User): Promise<Harvest> {
-    // First find the harvest to ensure it exists and belongs to the user
+    // Acha a colheita com base no id passado como parametro
     const harvest = await this.findOne(id, user);
     
-    // Apply the updates
+    // faz as alterações
     Object.assign(harvest, updateHarvestDto);
     
-    // Save and return the updated harvest
+    // Salva e retorna
     return this.harvestsRepository.save(harvest);
   }
 

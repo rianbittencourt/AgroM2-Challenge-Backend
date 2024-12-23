@@ -36,12 +36,15 @@ export class HarvestsController {
     return this.harvestsService.findOne(id, user);
   }
 
+
+    // Rota para alterar a colheite com base no id passado no parametro
   @Put(':id')
   update(
     @Param('id') id: string,
     @Body() updateHarvestDto: UpdateHarvestDto,
     @GetUser() user: User,
   ) {
+    // Chama o serviço para atualizar a colheita pelo ID, associada ao usuário autenticado
     return this.harvestsService.update(id, updateHarvestDto, user);
   }
 
