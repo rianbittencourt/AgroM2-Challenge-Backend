@@ -9,11 +9,11 @@ async function bootstrap() {
 
   // Habilita o CORS para todas as origens
   app.enableCors({
-    origin: 'http://localhost:3000', // Substitua pelo URL do seu frontend em produção
+    origin: process.env.NODE_ENV === 'production' ? '*' : 'http://localhost:3000', // Permite todas as origens em produção
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true, // Define se o servidor permitirá credenciais na solicitação
   });
-
+  
   app.useGlobalPipes(new ValidationPipe());
 
   // Aqui definimos nossa configuração para criar a documentação no Swagger acessível na /api
