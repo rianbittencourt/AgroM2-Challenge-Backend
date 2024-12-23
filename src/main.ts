@@ -3,6 +3,8 @@ import { ValidationPipe } from '@nestjs/common';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { AppModule } from './app.module';
 import { Logger } from '@nestjs/common';
+import { NextFunction, Request, Response } from 'express';
+
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -12,6 +14,13 @@ async function bootstrap() {
     origin: process.env.NODE_ENV === 'production' ? '*' : 'http://localhost:3000', // Permite todas as origens em produção
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true, // Define se o servidor permitirá credenciais na solicitação
+  });
+
+  app.use((req: Request, res: Response, next: NextFunction) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Accept, Authorization');
+    next();
   });
   
   app.useGlobalPipes(new ValidationPipe());
