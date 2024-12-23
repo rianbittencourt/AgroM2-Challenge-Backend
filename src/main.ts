@@ -11,7 +11,7 @@ async function bootstrap() {
 
   // Habilita o CORS para todas as origens
   app.enableCors({
-    origin: process.env.NODE_ENV === 'production' ? '*' : 'http://localhost:3000', // Permite todas as origens em produção
+    origin: process.env.NODE_ENV === 'production' ? '*' : 'https://agro-m2-challenge-front-end.vercel.app', // Permite todas as origens em produção
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true, // Define se o servidor permitirá credenciais na solicitação
   });

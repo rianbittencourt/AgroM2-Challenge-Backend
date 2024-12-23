@@ -1,10 +1,11 @@
-import { Controller, Get, Post, Body, Param, Delete, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Body,Put,  Param, Delete, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { HarvestsService } from './harvests.service';
 import { CreateHarvestDto } from './dto/create-harvest.dto';
 import { GetUser } from '../auth/decorators/get-user.decorator';
 import { User } from '../users/entities/user.entity';
+import { UpdateHarvestDto } from './dto/update-harvest.dto';
 
 @ApiTags('harvests') // Define a categoria 'harvests' para esta seção na documentação do Swagger
 @ApiBearerAuth() // Marca que as rotas requerem autenticação via Bearer Token (JWT)
@@ -34,6 +35,16 @@ export class HarvestsController {
     // Chama o serviço para recuperar a colheita pelo ID, associada ao usuário autenticado
     return this.harvestsService.findOne(id, user);
   }
+
+  @Put(':id')
+  update(
+    @Param('id') id: string,
+    @Body() updateHarvestDto: UpdateHarvestDto,
+    @GetUser() user: User,
+  ) {
+    return this.harvestsService.update(id, updateHarvestDto, user);
+  }
+
 
   // Rota para remover uma colheita pelo ID
   @Delete(':id')

@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Harvest } from './entities/harvest.entity';
 import { CreateHarvestDto } from './dto/create-harvest.dto';
+import { UpdateHarvestDto } from './dto/update-harvest.dto';
 import { User } from '../users/entities/user.entity';
 
 // O serviço é responsável pela lógica de negócios relacionada às operações de Harvest (colheitas).
@@ -46,6 +47,18 @@ export class HarvestsService {
 
     // Retorna a colheita encontrada.
     return harvest;
+  }
+
+
+  async update(id: string, updateHarvestDto: UpdateHarvestDto, user: User): Promise<Harvest> {
+    // First find the harvest to ensure it exists and belongs to the user
+    const harvest = await this.findOne(id, user);
+    
+    // Apply the updates
+    Object.assign(harvest, updateHarvestDto);
+    
+    // Save and return the updated harvest
+    return this.harvestsRepository.save(harvest);
   }
 
   // Método para remover uma colheita pelo ID, associada a um usuário.
