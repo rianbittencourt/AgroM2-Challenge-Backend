@@ -1,4 +1,4 @@
-import { Controller, Post, Body, HttpCode, HttpStatus } from '@nestjs/common';
+import { Controller, Post, Body, HttpCode, HttpStatus, All } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger'; // Importa decorators para a documentação da API
 import { AuthService } from './auth.service'; // Importa o serviço que contém a lógica de autenticação
 import { LoginDto } from './dto/login.dto'; // Importa o DTO para login
@@ -7,6 +7,11 @@ import { RegisterDto } from './dto/register.dto'; // Importa o DTO para registro
 @ApiTags('auth') // Define a categoria 'auth' para esta seção na documentação do Swagger
 @Controller('auth') // Define o caminho base para todas as rotas dentro deste controller como '/auth'
 export class AuthController {
+  @All()
+  @HttpCode(200) // Responde com status 200 para qualquer tipo de requisição
+  handleOptions() {
+    return '';  // Retorna uma resposta vazia para as requisições OPTIONS
+  }
   // Injeção do serviço AuthService que vai gerenciar o login e registro
   constructor(private readonly authService: AuthService) {}
 
