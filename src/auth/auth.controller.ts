@@ -7,11 +7,7 @@ import { RegisterDto } from './dto/register.dto'; // Importa o DTO para registro
 @ApiTags('auth') // Define a categoria 'auth' para esta seção na documentação do Swagger
 @Controller('auth') // Define o caminho base para todas as rotas dentro deste controller como '/auth'
 export class AuthController {
-  @All()
-  @HttpCode(200) // Responde com status 200 para qualquer tipo de requisição
-  handleOptions() {
-    return '';  // Retorna uma resposta vazia para as requisições OPTIONS
-  }
+
   // Injeção do serviço AuthService que vai gerenciar o login e registro
   constructor(private readonly authService: AuthService) {}
 
